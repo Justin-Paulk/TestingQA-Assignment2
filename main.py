@@ -1,104 +1,76 @@
-def bmi_calc(feet, inches, weight):
-    kg = pound_to_kg(weight)
-    inch_height = height_to_inches(feet, inches)
-    meters = inches_to_meters(inch_height)
-    bmi = kg / (meters * meters)
-    bmi = round(bmi, 1)
-    if bmi < 18.5:
-        final_bmi = ['Underweight', bmi]
-    elif bmi <= 24.9:
-        final_bmi = ['Normal Weight', bmi]
-    elif bmi <= 29.9:
-        final_bmi = ['Overweight', bmi]
+import os
+from funTimes import *
+from flask import Flask
+from flask import render_template
+from flask import request
+
+
+def create_app(test_config=None):
+    # create and configure the app
+    app = Flask(__name__, instance_relative_config=True)
+    app.config.from_mapping(
+        SECRET_KEY='dev',
+        DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
+    )
+
+    if test_config is None:
+        # load the instance config, if it exists, when not testing
+        app.config.from_pyfile('config.py', silent=True)
     else:
-        final_bmi = ['Obese', bmi]
+        # load the test config if passed in
+        app.config.from_mapping(test_config)
 
-    return final_bmi
+    # ensure the instance folder exists
+    try:
+        os.makedirs(app.instance_path)
+    except OSError:
+        pass
 
+    # a simple page that says hello
+    @app.route('/')
+    def index():
+        return render_template("index.html")
 
-def pound_to_kg(pounds):
-    kg = pounds * 0.45
-    return kg
+    @app.route('/bmiCalc.html', methods=["GET", "POST"])
+    def bmi_site():
+        if request.method == "POST":
+            if(request.form['feet'] and request.form['inches'] and request.form['pounds']):
+                try:
+                    feet = int(request.form.get('feet'))
+                    inches = int(request.form.get('inches'))
+                    pounds = float(request.form.get('pounds'))
+                    res = bmi_calc(feet, inches, pounds)
+                    resString = "You are " + str(res[0]) + " with a BMI of " + str(res[1])
+                    return render_template("bmiCalc.html", resString=resString, errString="")
+                except:
+                    return render_template("bmiCalc.html", errString="Please enter valid numbers")
 
-
-def height_to_inches(feet, inches):
-    inches = (feet * 12) + inches
-    return inches
-
-
-def inches_to_meters(inches):
-    meters = inches * 0.025
-    return meters
-
-
-def retirement_calc(age, salary, prcSaved, goal):
-    yearly_saved = saved_per_year(salary, prcSaved)
-    retire_age = years_to_goal(yearly_saved, goal) + age
-    return retire_age
-
-
-def saved_per_year(salary, prcSaved):
-    saved = (salary * prcSaved) + ((salary * prcSaved) * 0.35)
-    return saved
-
-
-def years_to_goal(yearly_saved, goal):
-    return goal / yearly_saved
+        return render_template("bmiCalc.html")
 
 
-def check_init_input(user_input):
-    if user_input == '1' or user_input == '2' or user_input == '3':
-        return True
-    else:
-        return False
+    @app.route('/retirementCalc.html', methods=["GET", "POST"])
+    def retirement_site():
+        if request.method == "POST":
+            if(request.form['age'] and request.form['goal'] and request.form['salary'] and request.form['prc_saved']):
+                try:
+                    age = float(request.form.get('age'))
+                    salary = float(request.form.get('salary'))
+                    prc_saved = float(request.form.get('prc_saved'))
+                    if prc_saved > 100:
+                        return render_template("retirementCalc.html", errString="Please enter valid numbers")
+                    prc_saved *= 1/100
+                    goal = float(request.form.get('goal'))
+                    res = round(float(retirement_calc(age, salary, prc_saved, goal)), 2)
+                    print(res)
+                    if res > 100.0:
+                        newRes = "The goal would be reached at " + str(res) + ".\nThe goal will not be met."
+                    else:
+                        newRes = "The goal would be reached at " + str(res) + ".\nThe goal will be met."
+                    print("here")
+                    return render_template("retirementCalc.html", resString=newRes)
+                except:
+                    return render_template("retirementCalc.html", errString="Please enter valid numbers")
 
+        return render_template("retirementCalc.html")
 
-def handle_bmi_input(user_input):
-    newVal = user_input.split()
-    result = bmi_calc(int(newVal[0]), int(newVal[1]), float(newVal[2]))
-    return result
-
-
-def handle_retirement_input(user_input):
-    newVal = user_input.split()
-    if float(newVal[2]) > 1.0:
-        raise ValueError('Percent Cannot be Over 1.0')
-    result = retirement_calc(float(newVal[0]), float(newVal[1]), float(newVal[2]), float(newVal[3]))
-    return result
-
-if __name__ == '__main__':
-    run = True
-    while run:
-        print("Please enter the integer value beside the function you wish to use")
-        print("1. BMI Calculator")
-        print("2. Retirement Savings Calculator")
-        print('3. Exit')
-
-        val = input()
-
-        if not check_init_input(val):
-            print("Invalid Input. Please enter a valid integer")
-
-
-        if val == '1':
-            print("Please enter the height in feet and inches followed by the weight in pounds")
-            print("Ex: 5 8 150")
-            val = input()
-
-            result = handle_bmi_input(val)
-
-            print(result[0], ": ", result[1])
-        elif val == '2':
-            print("Please enter the current age, salary, percent saved, and retirement goal")
-            print("Ex: 21 100000 0.15 500000")
-            val = input()
-            result = round(handle_retirement_input(val), 1)
-
-            print("Goal will be met at ", result, " years old.")
-
-            if result >= 100:
-                print("The savings goal will not be met.")
-
-        elif val == '3':
-            print("Closing software")
-            run = False
+    return app
