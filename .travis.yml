@@ -1,10 +1,12 @@
 language: python
-
 python:
-- "3.7"
-- "3.8"
-
+  - "3.7"
+  - "3.8"
 install:
-- pip install -r requirements.txt
-
-script: python -m unittest
+  - pip install pytest
+  - pip install pytest-cov
+  - pip install coveralls
+script:
+  - pytest --cov=test_main.py/
+after_success:
+  - coveralls
