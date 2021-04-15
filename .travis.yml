@@ -3,10 +3,8 @@ python:
   - "3.7"
   - "3.8"
 install:
-  - pip install pytest
-  - pip install pytest-cov
-  - pip install coveralls
+  - pip install unittest
 script:
-  - pytest --cov=test_main.py/
+  - python -m unittest
 after_success:
   - coveralls
