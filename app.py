@@ -6,9 +6,6 @@ from flask import render_template
 from flask import request
 
 
-app = Flask(__name__)
-
-
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+ <h1>Retirement Calculator:</h1>
+ <p>Please enter numbers without a comma</p>
+    <form method="post" action="#">
+        Age: <input type="text" placeholder="Age" name="age"><br>
+        Salary: <input type="text" placeholder="Salary" name="salary"><br>
+        Percent Saved Annually: <input type="text" placeholder="Percent Saved" name="prc_saved"><br>
+        Savings Goal: <input type="text" placeholder="Goal" name="goal"><br>
+        <input type="submit" value="Calculate">
+        <p style="color: red">{{errString}}</p>
+        <p>{{resString}}</p>
+    </form>
+<br>
+<a href="/"><button>Home</button></a>
+</body>
+</html>

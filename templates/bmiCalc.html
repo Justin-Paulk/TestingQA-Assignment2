@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BMI Calculator</title>
+</head>
+<body>
+    <h1>BMI Calculator:</h1>
+
+    <form method="post" action="#">
+        Height: <br>
+        Feet: <input type="text" placeholder="Feet" name="feet"><br>
+        Inches: <input type="text" placeholder="Inches" name="inches"><br>
+        Weight: <input type="text" placeholder="Pounds" name="pounds"><br>
+        <input type="submit" value="Calculate">
+        <p style="color: red">{{errString}}</p>
+        <p>{{resString}}</p>
+    </form>
+<br>
+<a href="/"><button>Home</button></a>
+</body>
+</html>
