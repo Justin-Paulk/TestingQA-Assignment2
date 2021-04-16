@@ -66,39 +66,40 @@ def handle_retirement_input(user_input):
     result = retirement_calc(float(newVal[0]), float(newVal[1]), float(newVal[2]), float(newVal[3]))
     return result
 
-if __name__ == '__main__':
-    run = True
-    while run:
-        print("Please enter the integer value beside the function you wish to use")
-        print("1. BMI Calculator")
-        print("2. Retirement Savings Calculator")
-        print('3. Exit')
+#if __name__ == '__main__':
+ #   run = True
+  #  while run:
+   #     print("Please enter the integer value beside the function you wish to use")
+    #    print("1. BMI Calculator")
+     #   print("2. Retirement Savings Calculator")
+      #  print('3. Exit')
+#
+ #       val = input()
+#
+ #       if not check_init_input(val):
+  #          print("Invalid Input. Please enter a valid integer")
 
-        val = input()
 
-        if not check_init_input(val):
-            print("Invalid Input. Please enter a valid integer")
+   #     if val == '1':
+    #        print("Please enter the height in feet and inches followed by the weight in pounds")
+     #       print("Ex: 5 8 150")
+      #      val = input()
+#
+ #           result = handle_bmi_input(val)
 
-
-        if val == '1':
-            print("Please enter the height in feet and inches followed by the weight in pounds")
-            print("Ex: 5 8 150")
-            val = input()
-
-            result = handle_bmi_input(val)
-
-            print(result[0], ": ", result[1])
-        elif val == '2':
-            print("Please enter the current age, salary, percent saved, and retirement goal")
-            print("Ex: 21 100000 0.15 500000")
-            val = input()
-            result = round(handle_retirement_input(val), 1)
-
-            print("Goal will be met at ", result, " years old.")
-
-            if result >= 100:
-                print("The savings goal will not be met.")
-
-        elif val == '3':
-            print("Closing software")
-            run = False
+  #          print(result[0], ": ", result[1])
+   #     elif val == '2':
+    #        print("Please enter the current age, salary, percent saved, and retirement goal")
+     #       print("Ex: 21 100000 0.15 500000")
+      #      val = input()
+       #     result = round(handle_retirement_input(val), 1)
+#
+ #           print("Goal will be met at ", result, " years old.")
+#
+ #           if result >= 100:
+  #              print("The savings goal will not be met.")
+#
+ #       elif val == '3':
+  #          print("Closing software")
+   #         run = False
+#
