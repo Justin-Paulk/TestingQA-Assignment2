@@ -12,8 +12,10 @@
 <h3>Heroku</h3>
 <p>Heroku is the cloud platform used for the deployment and management of the web app. It integrates with github and supports TravisCI checks as well. For this repository there are two seperate instances of Heroku deployment, one for the staging branch and one for the production branch. The staging branch is deployed automatically as long as the TravisCI checks pass, and the production branch is deployed manually.</p>
 <h3>Coveralls</h3>
-<p>Coveralls is used in this repository to ensure maximum code coverage. Current code coverage can be found below under the header labeled "Code Coverage".
+<p>Coveralls is used in this repository to ensure maximum code coverage. Current code coverage can be found below under the header labeled "Code Coverage and Build Status".
 
-<h1>Code Coverage</h1>
+<h1>Code Coverage and Build Status</h1>
 
 [![Coverage Status](https://coveralls.io/repos/github/CognizantPotato/TestingQA-Assignment2/badge.svg?branch=main)](https://coveralls.io/github/CognizantPotato/TestingQA-Assignment2?branch=main)
+
+[![Build Status](https://www.travis-ci.com/CognizantPotato/TestingQA-Assignment2.svg?branch=main)](https://www.travis-ci.com/CognizantPotato/TestingQA-Assignment2)
