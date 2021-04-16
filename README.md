@@ -14,6 +14,8 @@
 <h3>Coveralls</h3>
 <p>Coveralls is used in this repository to ensure maximum code coverage. Current code coverage can be found below under the header labeled "Code Coverage".
 
-<h1>Code Coverage</h1>
+<h1>Code Coverage and Testing Status</h1>
 
 [![Coverage Status](https://coveralls.io/repos/github/CognizantPotato/TestingQA-Assignment2/badge.svg?branch=main)](https://coveralls.io/github/CognizantPotato/TestingQA-Assignment2?branch=main)
+
+https://www.travis-ci.com/CognizantPotato/TestingQA-Assignment2.svg?branch=main
