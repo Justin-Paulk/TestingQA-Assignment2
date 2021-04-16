@@ -3,9 +3,24 @@ from funTimes import *
 
 
 class BMITest(unittest.TestCase):
-    def test_bmi_calc(self):
+    def test_bmi_calc_normal(self):
         real = bmi_calc(5, 3, 125)
         assumed = ['Normal Weight', 22.7]
+        self.assertEqual(assumed, real)
+
+    def test_bmi_calc_obese(self):
+        real = bmi_calc(6, 3, 300)
+        assumed = ['Obese', 38.4]
+        self.assertEqual(assumed, real)
+
+    def test_bmi_calc_underweight(self):
+        real = bmi_calc(6, 3, 120)
+        assumed = ['Underweight', 15.4]
+        self.assertEqual(assumed, real)
+
+    def test_bmi_calc_overweight(self):
+        real = bmi_calc(6, 3, 220)
+        assumed = ['Overweight', 28.2]
         self.assertEqual(assumed, real)
 
     def test_pound_to_kg(self):
