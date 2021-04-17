@@ -1,6 +1,5 @@
 import os
 from funTimes import *
-from gunicorn import *
 from flask import Flask
 from flask import render_template
 from flask import request
